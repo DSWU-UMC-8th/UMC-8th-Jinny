@@ -20,8 +20,9 @@ function addTodoItem(content: string): void {
   todoItemDiv.appendChild(todoBtn);
   todoItem.appendChild(todoItemDiv);
 
+  // 완료 버튼 누르면 ...
   todoBtn.addEventListener("click", (): void => {
-    todoItemDiv.remove();
+    todoItemDiv.remove(); // 할 일 목록에서 삭제
 
     const doneItem = document.getElementsByClassName("todo_completed")[0] as HTMLDivElement;
 
@@ -39,6 +40,11 @@ function addTodoItem(content: string): void {
     doneItemDiv.appendChild(doneContent);
     doneItemDiv.appendChild(deleteBtn);
     doneItem.appendChild(doneItemDiv);
+
+    // 삭제 버튼 누르면 ...
+    deleteBtn.addEventListener("click", (): void => {
+      doneItemDiv.remove();
+    });
   });
 }
 

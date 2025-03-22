@@ -28,6 +28,9 @@ function addTodoItem(content) {
         doneItemDiv.appendChild(doneContent);
         doneItemDiv.appendChild(deleteBtn);
         doneItem.appendChild(doneItemDiv);
+        deleteBtn.addEventListener("click", () => {
+            doneItemDiv.remove();
+        });
     });
 }
 addBtn.addEventListener("click", () => {
