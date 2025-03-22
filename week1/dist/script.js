@@ -14,6 +14,21 @@ function addTodoItem(content) {
     todoItemDiv.appendChild(todoContent);
     todoItemDiv.appendChild(todoBtn);
     todoItem.appendChild(todoItemDiv);
+    todoBtn.addEventListener("click", () => {
+        todoItemDiv.remove();
+        const doneItem = document.getElementsByClassName("todo_completed")[0];
+        const doneItemDiv = document.createElement("div");
+        const doneContent = document.createElement("p");
+        const deleteBtn = document.createElement("button");
+        doneItemDiv.classList.add("done_item");
+        doneContent.classList.add("done_text");
+        deleteBtn.classList.add("delete_btn");
+        doneContent.innerText = todoContent.innerText;
+        deleteBtn.innerText = "삭제";
+        doneItemDiv.appendChild(doneContent);
+        doneItemDiv.appendChild(deleteBtn);
+        doneItem.appendChild(doneItemDiv);
+    });
 }
 addBtn.addEventListener("click", () => {
     let content = input.value;
