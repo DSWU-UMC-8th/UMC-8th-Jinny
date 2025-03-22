@@ -3,35 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheer" href="./style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <script type="module" src="./dist/script.js" defer></script>
     <title>UMC TODO</title>
   </head>
   <body>
-    <header>
-      <h3>TODO🌱</h3>
-    </header>
-    <section>
-      <input placeholder="할 일 입력" />
-      <button>할 일 추가</button>
-    </section>
-    <section>
-      <!-- 할 일일 -->
-      <div>
-        <h4>할 일</h4>
-        <div>
-          <p>할 일에 대한 내용...</p>
-          <button>완료</button>
+    <div class="todo_container">
+      <header>
+        <h2>TODO🌱</h2>
+      </header>
+
+      <!-- 할 일 입력 -->
+      <section class="todo_form">
+        <input placeholder="할 일 입력" />
+        <button>할 일 추가</button>
+      </section>
+
+      <section class="todo_list">
+        <!-- 할 일 -->
+        <div class="todo_todo">
+          <h4>할 일</h4>
+          <div class="todo_item">
+            <p>할 일에 대한 내용...</p>
+            <button class="done_btn">완료</button>
+          </div>
         </div>
-      </div>
-      <!-- 완료 -->
-      <div>
-        <h4>완료</h4>
-        <div>
-          <p>완료된 일에 대한 내용...</p>
-          <button>삭제</button>
+        <!-- 완료 -->
+        <div class="todo_completed">
+          <h4>완료</h4>
+          <div class="todo_item">
+            <p>완료된 일에 대한 내용...</p>
+            <button class="delete_btn">삭제</button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </body>
 </html>
