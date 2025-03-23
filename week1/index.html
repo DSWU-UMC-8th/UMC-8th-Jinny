@@ -14,26 +14,29 @@
       </header>
 
       <!-- 할 일 입력 -->
-      <section class="todo_form">
-        <input value="" placeholder="할 일 입력" id="form_input" />
-        <button id="form_btn">할 일 추가</button>
+      <section class="todo_container_form">
+        <form id="form">
+          <input placeholder="할 일 입력" id="todo_container__input" required />
+          <button type="submit" id="todo_container__btn">할 일 추가</button>
+        </form>
       </section>
 
-      <section class="todo_list">
+      <section class="render_container">
         <!-- 할 일 -->
-        <div class="todo_todo">
+        <div class="render_container__section" id="todo_list">
           <h4>할 일</h4>
-          <!-- <div class="todo_item">
-            <p class="todo_text">할 일에 대한 내용...</p>
-            <button class="done_btn">완료</button>
+
+          <!-- <div class="render_container__todolist">
+            <p class="render_container__text">할 일에 대한 내용...</p>
+            <button class="render_container__btn">완료</button>
           </div> -->
         </div>
         <!-- 완료 -->
-        <div class="todo_completed">
+        <div class="render_container__section" id="done_list">
           <h4>완료</h4>
-          <!-- <div class="done_item">
-            <p class="done_text">완료된 일에 대한 내용...</p>
-            <button class="delete_btn">삭제</button>
+          <!-- <div class="render_container__donelist" >
+            <p class="render_container__text">완료된 일에 대한 내용...</p>
+            <button class="render_container__btn">삭제</button>
           </div> -->
         </div>
       </section>
