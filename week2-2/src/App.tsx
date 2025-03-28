@@ -10,7 +10,7 @@ function App() {
     setCount((prev) => prev + 1);
     setCount((prev) => prev + 1);
     setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1); // 6씩 증가
   };
 
   return (
