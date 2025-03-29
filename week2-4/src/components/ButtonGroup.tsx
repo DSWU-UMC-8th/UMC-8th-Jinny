@@ -1,11 +1,9 @@
+import { useCount } from "../context/CounterProvider";
 import Button from "./Button";
 
-interface ButtonGroupProps {
-  handleIncrement?: () => void;
-  handleDecrement?: () => void;
-}
+const ButtonGroup = () => {
+  const { handleIncrement, handleDecrement } = useCount();
 
-const ButtonGroup = ({ handleIncrement, handleDecrement }: ButtonGroupProps) => {
   return (
     <div>
       {/* <button onClick={handleIncrement}>+1 증가</button>
