@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   const [person, setPerson] = useState({
     name: "김진효",
@@ -15,7 +15,7 @@ function App() {
   newPerson.nickname = "jinny2";
   console.log(person.nickname); // jinny
 
-  const newPersonDeep = JSON.parse(JSON.stringify(person)); // 깊은 복사
+  // const newPersonDeep = JSON.parse(JSON.stringify(person)); // 깊은 복사
 
   // city 값을 새로 추가하여 업데이트하는 함수
   const updateCity = () => {
@@ -33,14 +33,14 @@ function App() {
     }));
   };
 
-  const handleIncreaseNumber = () => {
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1); // 6씩 증가
-  };
+  // const handleIncreaseNumber = () => {
+  //   setCount((prev) => prev + 1);
+  //   setCount((prev) => prev + 1);
+  //   setCount((prev) => prev + 1);
+  //   setCount((prev) => prev + 1);
+  //   setCount((prev) => prev + 1);
+  //   setCount((prev) => prev + 1); // 6씩 증가
+  // };
 
   return (
     <>
