@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "movies",
+        path: "movies/:movieId", // "/:"을 활용하여, 동적으로 바뀌는 부분의 이름 정의
         element: <MoviesPage />,
       },
     ],
