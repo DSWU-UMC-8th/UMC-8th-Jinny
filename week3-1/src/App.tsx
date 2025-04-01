@@ -1,15 +1,25 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import MoviesPage from "./pages/MoviesPage";
+import RootLayout from "./layout/root-layout.tsx";
+import HomePage from "./pages/HomePage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <h1>🏠홈 페이지</h1>,
-    errorElement: <h1>😮잘못된 경로입니다</h1>,
-  },
-  {
-    path: "/movies",
-    element: <h1>🍿영화 페이지</h1>,
+    element: <RootLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        index: true, // "/" 경로를 의미미
+        element: <HomePage />,
+      },
+      {
+        path: "movies",
+        element: <MoviesPage />,
+      },
+    ],
   },
 ]);
 
