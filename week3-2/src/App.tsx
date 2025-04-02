@@ -1,12 +1,18 @@
 import "./App.css";
+// import Parent from "./components/UseEffectCounterPage";
+import UseEffectError from "./components/UseEffectError";
+import UseEffect from "./components/UseEffect";
 // import MoviesPage from "./components/MoviesPage";
-import SearchPage from "./components/SearchPage";
+// import SearchPage from "./components/SearchPage";
 
 function App() {
   return (
     <>
       {/* <MoviesPage /> */}
-      <SearchPage />
+      {/* <SearchPage /> */}
+      <UseEffect />
+      {/* <Parent /> */}
+      <UseEffectError />
     </>
   );
 }
