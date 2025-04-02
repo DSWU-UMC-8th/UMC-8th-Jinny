@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  background-color: rgb(245, 245, 245);
+}
+
+button {
+  cursor: pointer;
+}
+
+.todo_container {
+  width: 400px;
+  height: max-content;
+  margin: 0 auto;
+
+  background-color: white;
+  border-radius: 10px;
+
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 5px 3px rgb(220, 220, 220);
+}
+
+.todo_container_form {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.todo_container_form input {
+  flex: 1;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  border: 2px solid rgb(220, 220, 220);
+  padding-left: 10px;
+}
+
+.todo_container_form button {
+  width: 80px;
+
+  border-radius: 5px;
+  outline: none;
+  border: none;
+
+  background-color: rgb(37, 147, 255);
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.todo_container_form button:hover {
+  background-color: rgb(29, 110, 192);
+}
+
+.render_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.render_container__section {
+  width: calc(50% - 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.render_container__todolist,
+.render_container__donelist {
+  width: 100%;
+  height: 50px;
+
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgb(245, 245, 245);
+  box-shadow: 0px 3px 3px rgb(220, 220, 220);
+  border-radius: 5px;
+}
+
+.render_container__todolist p,
+.render_container__donelist p {
+  width: calc(100% - 40px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.render_container__todolist button,
+.render_container__donelist button {
+  width: 50px;
+  height: 30px;
+
+  border-radius: 5px;
+  outline: none;
+  border: none;
+
+  color: white;
+  transition: background-color 0.3s ease;
+  background-color: rgb(37, 147, 255);
+}
+
+.render_container__todolist button:hover {
+  background-color: rgb(29, 110, 192);
+}
+
+/* .done_btn {
+  background-color: rgb(37, 147, 255);
+} */
+
+/* .done_btn:hover {
+  background-color: rgb(29, 110, 192);
+}
+
+.delete_btn {
+  background-color: rgb(235, 43, 43);
+} */
+
+.render_container__donelist button:hover {
+  background-color: rgb(187, 34, 34);
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./dist/script.js" defer></script>
+    <title>UMC TODO</title>
+  </head>
+  <body>
+    <div class="todo_container">
+      <header>
+        <h2>TODO🌱</h2>
+      </header>
+
+      <!-- 할 일 입력 -->
+      <section class="todo_container_form">
+        <form id="form">
+          <input placeholder="할 일 입력" id="todo_container__input" required />
+          <button type="submit" id="todo_container__btn">할 일 추가</button>
+        </form>
+      </section>
+
+      <section class="render_container">
+        <!-- 할 일 -->
+        <div class="render_container__section" id="todo_list">
+          <h4>할 일</h4>
+
+          <!-- <div class="render_container__todolist">
+            <p class="render_container__text">할 일에 대한 내용...</p>
+            <button class="render_container__btn">완료</button>
+          </div> -->
+        </div>
+        <!-- 완료 -->
+        <div class="render_container__section" id="done_list">
+          <h4>완료</h4>
+          <!-- <div class="render_container__donelist" >
+            <p class="render_container__text">완료된 일에 대한 내용...</p>
+            <button class="render_container__btn">삭제</button>
+          </div> -->
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
