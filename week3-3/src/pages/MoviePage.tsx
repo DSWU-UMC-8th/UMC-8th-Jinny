@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Movie, MovieResponse } from "../types/movie";
 import MovieCard from "../components/MovieCard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useParams } from "react-router-dom";
 
 const MoviePage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -16,13 +17,19 @@ const MoviePage = () => {
   //3. 페이지
   const [page, setPage] = useState(1);
 
+  const { category } = useParams<{
+    category: string;
+  }>();
+
+  console.log(category);
+
   useEffect(() => {
     const fetchMovies = async () => {
       setIsPending(true);
 
       try {
         const { data } = await axios.get<MovieResponse>(
-          `https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=${page}`,
+          `https://api.themoviedb.org/3/movie/${category}?language=ko-KR&page=${page}`,
           {
             headers: {
               Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
@@ -39,7 +46,7 @@ const MoviePage = () => {
     };
 
     fetchMovies();
-  }, [page]);
+  }, [page, category]);
 
   // if (!isPending) {
   //   return <LoadingSpinner />;
@@ -57,13 +64,13 @@ const MoviePage = () => {
     <>
       <div className="flex items-center justify-center gap-6 mt-5">
         <button
-          className="bg-[#228be6] text-white px-5 py-2 rounded-lg shadow-md hover:bg-[#1a68ad] transition-all duration-200 disabled:bg-gray-300 cursor-pointer disabled:cursor-not-allowed"
+          className="bg-[#2593ff] text-white px-5 py-2 rounded-lg shadow-md hover:bg-[#1a68ad] transition-all duration-200 disabled:bg-gray-300 cursor-pointer disabled:cursor-not-allowed"
           disabled={page === 1}
           onClick={() => setPage((prev) => prev - 1)}
         >{`<`}</button>
         <span>{page}페이지</span>
         <button
-          className="bg-[#228be6] text-white px-5 py-2 rounded-lg shadow-md hover:bg-[#1a68ad] transition-all duration-200 cursor-pointer"
+          className="bg-[#2593ff] text-white px-5 py-2 rounded-lg shadow-md hover:bg-[#1a68ad] transition-all duration-200 cursor-pointer"
           onClick={() => setPage((prev) => prev + 1)}
         >{`>`}</button>
       </div>
