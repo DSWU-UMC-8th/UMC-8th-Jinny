@@ -1,7 +1,12 @@
 import "./App.css";
+import MoviePage from "./pages/MoviePage";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <MoviePage />
+    </>
+  );
 }
 
 export default App;
