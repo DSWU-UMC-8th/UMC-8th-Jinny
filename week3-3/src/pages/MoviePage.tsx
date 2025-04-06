@@ -21,7 +21,7 @@ const MoviePage = () => {
     category: string;
   }>();
 
-  console.log(category);
+  // console.log(category);
 
   useEffect(() => {
     const fetchMovies = async () => {
