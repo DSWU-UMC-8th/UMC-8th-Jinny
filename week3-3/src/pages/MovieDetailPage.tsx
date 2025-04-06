@@ -70,7 +70,7 @@ const MovieDetailPage = () => {
           <h3 className="text-sm text-white">{movie.release_date?.slice(0, 4)}</h3>
           <h3 className="text-sm text-white">{movie.runtime}분</h3>
           <h2 className="text-3xl text-white mt-3">{movie.tagline}</h2>
-          <p className="text-base text-white mt-3">{movie.overview}</p>
+          <p className="text-base text-white mt-3 line-clamp-5">{movie.overview}</p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ const MovieDetailPage = () => {
         <div className="p-10 grid gap-4 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 place-items-start">
           {cast.map((cast) => {
             return (
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center" key={cast.id}>
                 <div className="w-[120px] h-[120px] overflow-hidden rounded-full" key={cast.id}>
                   {cast.profile_path === null ? (
                     <div className="bg-gray-200 w-full h-full"></div>
