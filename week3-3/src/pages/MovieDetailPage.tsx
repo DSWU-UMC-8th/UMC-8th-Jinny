@@ -79,7 +79,7 @@ const MovieDetailPage = () => {
         <div className="p-10 grid gap-4 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 place-items-start">
           {cast.map((cast) => {
             return (
-              <div className="flex flex-col items-center" key={cast.id}>
+              <div className="flex flex-col items-center text-center" key={cast.id}>
                 <div className="w-[120px] h-[120px] overflow-hidden rounded-full" key={cast.id}>
                   {cast.profile_path === null ? (
                     <div className="bg-gray-200 w-full h-full"></div>
