@@ -66,8 +66,8 @@ const MovieDetailPage = () => {
 
         <div className="relative z-20 w-150 p-10 text-base/7 gap-3 flex flex-col justify-center h-full">
           <h1 className="text-4xl font-bold text-white">{movie.title}</h1>
-          <h3 className="text-sm text-white">평균 {movie.vote_average}</h3>
-          <h3 className="text-sm text-white">{movie.release_date}</h3>
+          <h3 className="text-sm text-white">평균 {movie.vote_average?.toFixed(2)}</h3>
+          <h3 className="text-sm text-white">{movie.release_date?.slice(0, 4)}</h3>
           <h3 className="text-sm text-white">{movie.runtime}분</h3>
           <h2 className="text-3xl text-white mt-3">{movie.tagline}</h2>
           <p className="text-base text-white mt-3">{movie.overview}</p>
