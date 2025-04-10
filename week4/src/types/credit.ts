@@ -13,4 +13,8 @@ export type Cast = {
   profile_path: string;
 };
 
-export type CastList = Cast[];
+export type CastResonse = {
+  id: string;
+  cast: Cast[];
+  crew: [];
+};

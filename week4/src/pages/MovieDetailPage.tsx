@@ -1,48 +1,18 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MovieDetailResponse } from "../types/detail";
-import { Cast } from "../types/credit";
+import { CastResonse } from "../types/credit";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useCustomFetch from "../hooks/useCustomFetch";
 
 const MovieDetailPage = () => {
   const { movieId } = useParams();
 
-  const [isPending, setIsPending] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [movie, setMovie] = useState<MovieDetailResponse>();
-  const [cast, setCast] = useState<Cast[]>([]);
+  const detailUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`;
+  const creditUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko-KR`;
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      setIsPending(true);
-
-      try {
-        const { data } = await axios.get<MovieDetailResponse>(
-          `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`,
-          {
-            headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
-            },
-          }
-        );
-        const credit = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko-KR`, {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
-          },
-        });
-        // console.log(credit);
-        setMovie(data);
-        setCast(credit.data.cast);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsPending(false);
-      }
-    };
-
-    fetchMovies();
-  }, [movieId]);
+  const { data: movie, isPending, isError } = useCustomFetch<MovieDetailResponse>(detailUrl);
+  const { data: cast } = useCustomFetch<CastResonse>(creditUrl);
+  console.log(cast);
 
   if (isError) {
     return (
@@ -80,7 +50,7 @@ const MovieDetailPage = () => {
       <div>
         {!isPending && <h3 className="text-3xl pl-10 mt-4">감독/출연</h3>}
         <div className="p-10 grid gap-4 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 place-items-start">
-          {cast.map((cast) => {
+          {cast?.cast.map((cast) => {
             return (
               <div className="flex flex-col items-center text-center" key={cast.id}>
                 <div className="w-[120px] h-[120px] overflow-hidden rounded-full" key={cast.id}>
