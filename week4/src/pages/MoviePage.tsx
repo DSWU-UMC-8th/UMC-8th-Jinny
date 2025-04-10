@@ -14,7 +14,7 @@ const MoviePage = () => {
 
   const url = `https://api.themoviedb.org/3/movie/${category}?language=ko-KR&page=${page}`;
 
-  const { data: movies, isPending, isError } = useCustomFetch<MovieResponse>(url);
+  const { data: movies, isPending, isError } = useCustomFetch<MovieResponse>(url, "ko-KR");
   console.log(movies);
 
   if (isError) {

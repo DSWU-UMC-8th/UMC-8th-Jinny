@@ -7,7 +7,9 @@ interface ApiResponse<T> {
   isError: boolean;
 }
 
-function useCustomFetch<T>(url: string): ApiResponse<T> {
+type Language = "ko-KR" | "en-US";
+
+function useCustomFetch<T>(url: string, language: Language = "en-US"): ApiResponse<T> {
   const [data, setData] = useState<T | null>(null);
   const [isPending, setIsPending] = useState(false); // 로딩 상태
   const [isError, setIsError] = useState(false); // 에러 상태
@@ -21,6 +23,9 @@ function useCustomFetch<T>(url: string): ApiResponse<T> {
           headers: {
             Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
           },
+          params: {
+            language,
+          },
         });
         setData(data);
       } catch {
@@ -30,7 +35,7 @@ function useCustomFetch<T>(url: string): ApiResponse<T> {
       }
     };
     fetchData();
-  }, [url]);
+  }, [url, language]);
 
   return { data, isPending, isError };
 }
