@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Detail } from "../types/detail";
+import { MovieDetailResponse } from "../types/detail";
 import { Cast } from "../types/credit";
 import LoadingSpinner from "../components/LoadingSpinner";
 
@@ -10,7 +10,7 @@ const MovieDetailPage = () => {
 
   const [isPending, setIsPending] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [movie, setMovie] = useState<Detail>({});
+  const [movie, setMovie] = useState<MovieDetailResponse>();
   const [cast, setCast] = useState<Cast[]>([]);
 
   useEffect(() => {
@@ -18,11 +18,14 @@ const MovieDetailPage = () => {
       setIsPending(true);
 
       try {
-        const { data } = await axios.get<Detail>(`https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`, {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
-          },
-        });
+        const { data } = await axios.get<MovieDetailResponse>(
+          `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`,
+          {
+            headers: {
+              Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
+            },
+          }
+        );
         const credit = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=ko-KR`, {
           headers: {
             Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
@@ -59,18 +62,18 @@ const MovieDetailPage = () => {
       <div
         className="bg-cover bg-center h-100 opacity-80 relative"
         style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.poster_path})`,
+          backgroundImage: `url(https://image.tmdb.org/t/p/original${movie?.poster_path})`,
         }}
       >
         {!isPending && <div className="absolute w-full h-100 bg-gradient-to-r from-black to-white-500 z-10" />}
 
         <div className="relative z-20 w-150 p-10 text-base/7 gap-3 flex flex-col justify-center h-full">
-          <h1 className="text-4xl font-bold text-white">{movie.title}</h1>
-          <h3 className="text-sm text-white">평균 {movie.vote_average?.toFixed(2)}</h3>
-          <h3 className="text-sm text-white">{movie.release_date?.slice(0, 4)}</h3>
-          <h3 className="text-sm text-white">{movie.runtime}분</h3>
-          <h2 className="text-3xl text-white mt-3">{movie.tagline}</h2>
-          <p className="text-base text-white mt-3 line-clamp-5">{movie.overview}</p>
+          <h1 className="text-4xl font-bold text-white">{movie?.title}</h1>
+          <h3 className="text-sm text-white">평균 {movie?.vote_average?.toFixed(2)}</h3>
+          <h3 className="text-sm text-white">{movie?.release_date?.slice(0, 4)}</h3>
+          <h3 className="text-sm text-white">{movie?.runtime}분</h3>
+          <h2 className="text-3xl text-white mt-3">{movie?.tagline}</h2>
+          <p className="text-base text-white mt-3 line-clamp-5">{movie?.overview}</p>
         </div>
       </div>
 
