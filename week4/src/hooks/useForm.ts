@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 interface UseFormProps<T> {
   initialValue: T; // {email:'', password:''}
   // 값이 올바른지 검증하는 함수
-  validate: (value: T) => Record<keyof Text, string>;
+  validate: (value: T) => Record<keyof T, string>;
 }
 
 function useForm<T>({ initialValue, validate }: UseFormProps<T>) {
