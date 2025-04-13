@@ -4,6 +4,9 @@ import MoviePage from "./pages/MoviePage";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import MovieDetailPage from "./pages/MovieDetailPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignupPage";
+import HomeLayout from "./layouts/HomeLayout";
 
 // BrowserRouter v5
 // createBrowserRouter v6
@@ -11,9 +14,10 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <HomeLayout />,
     errorElement: <NotFound />,
     children: [
+      { index: true, element: <HomePage /> },
       {
         path: "movies/:category",
         element: <MoviePage />,
@@ -22,6 +26,8 @@ const router = createBrowserRouter([
         path: "movie/:movieId",
         element: <MovieDetailPage />,
       },
+      { path: "login", element: <LoginPage /> },
+      { path: "signup", element: <SignUpPage /> },
     ],
   },
 ]);
