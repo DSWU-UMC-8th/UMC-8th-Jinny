@@ -34,7 +34,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 h-[calc(100dvh_-_56px)]">
+    <div className="flex flex-col items-center gap-4 mt-[100px]">
       <div className="flex flex-row w-[300px] items-center">
         <h3 className="text-2xl cursor-pointer" onClick={() => navigate(-1)}>{`<`}</h3>
         <h3 className="text-2xl font-bold flex-1 text-center">로그인</h3>

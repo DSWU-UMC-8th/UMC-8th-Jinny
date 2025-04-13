@@ -6,6 +6,7 @@ import google from "../assets/img/google.png";
 import mailIcon from "../assets/img/email.png";
 import view from "../assets/img/view.png";
 import close from "../assets/img/eye.png";
+import user from "../assets/img/user.png";
 import { useState } from "react";
 
 const schema = z
@@ -93,7 +94,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 h-[calc(100dvh_-_56px)]">
+    <div className="flex flex-col items-center gap-4 mt-[100px]">
       <div className="flex flex-row w-[300px] items-center">
         <h3
           className="text-2xl cursor-pointer"
@@ -208,6 +209,9 @@ const SignUpPage = () => {
         {/* 3단계: 이름 */}
         {step === 3 && (
           <>
+            <div className="w-full flex justify-center">
+              <img src={user} className="w-[200px] h-[200px]"></img>
+            </div>
             <input
               {...register("name")}
               className={`border border-[#ccc] w-[300px] p-[10px] focus:border-[#807bff] rounded-sm ${
