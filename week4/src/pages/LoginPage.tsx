@@ -1,10 +1,16 @@
 const LoginPage = () => {
+  // const [formValues, setFormValues] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+
   const handleSubmit = () => {};
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <div className="flex flex-col gap-3">
         <input
+          name="email"
           className="border border-[#ccc] w-[300px] p-[10px] focus:border-[#807bff] rounded-sm"
           type={"email"}
           placeholder={"이메일"}
