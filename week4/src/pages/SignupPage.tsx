@@ -8,6 +8,7 @@ import view from "../assets/img/view.png";
 import close from "../assets/img/eye.png";
 import user from "../assets/img/user.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const schema = z
   .object({
@@ -42,6 +43,8 @@ const SignUpPage = () => {
   const [seePass, setSeePass] = useState(false);
   const [seePassCheck, setSeePassCheck] = useState(false);
 
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -65,6 +68,8 @@ const SignUpPage = () => {
 
     const response = await postSignup(rest);
     console.log(response);
+
+    navigate("/login");
   };
 
   const handleNext = async () => {

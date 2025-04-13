@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { setItem } = useLocalStorage(LOCAL_STORAGE_KEY.accessToken);
+  const navigate = useNavigate();
   const { values, errors, touched, getInputProps } = useForm<UserSigninInformation>({
     initialValue: {
       email: "",
@@ -20,6 +21,7 @@ const LoginPage = () => {
     try {
       const response = await postSignin(values);
       console.log(response);
+      navigate("/");
       setItem(response.data.accessToken);
     } catch (e) {
       alert(e);
@@ -30,8 +32,6 @@ const LoginPage = () => {
   const isDisabled =
     Object.values(errors || {}).some((error) => error.length > 0) || // 오류가 있으면 true
     Object.values(values).some((value) => value === ""); // 입력값이 비어있으면 true
-
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center gap-4 mt-[100px]">
