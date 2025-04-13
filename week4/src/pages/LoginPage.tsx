@@ -4,6 +4,7 @@ import useForm from "../hooks/useForm";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserSigninInformation, validateSignin } from "../utils/validate";
 import google from "../assets/img/google.png";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { setItem } = useLocalStorage(LOCAL_STORAGE_KEY.accessToken);
@@ -30,10 +31,12 @@ const LoginPage = () => {
     Object.values(errors || {}).some((error) => error.length > 0) || // 오류가 있으면 true
     Object.values(values).some((value) => value === ""); // 입력값이 비어있으면 true
 
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 h-[calc(100dvh_-_56px)]">
       <div className="flex flex-row w-[300px] items-center">
-        <h3 className="text-2xl cursor-pointer">{`<`}</h3>
+        <h3 className="text-2xl cursor-pointer" onClick={() => navigate(-1)}>{`<`}</h3>
         <h3 className="text-2xl font-bold flex-1 text-center">로그인</h3>
       </div>
 
