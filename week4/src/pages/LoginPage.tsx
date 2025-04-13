@@ -30,7 +30,7 @@ const LoginPage = () => {
     Object.values(values).some((value) => value === ""); // 입력값이 비어있으면 true
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
+    <div className="flex flex-col items-center justify-center gap-4 h-[calc(100dvh_-_56px)]">
       <div className="flex flex-col gap-3">
         <input
           {...getInputProps("email")}
