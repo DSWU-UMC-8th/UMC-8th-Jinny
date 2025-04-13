@@ -3,6 +3,7 @@ import { LOCAL_STORAGE_KEY } from "../constants/key";
 import useForm from "../hooks/useForm";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserSigninInformation, validateSignin } from "../utils/validate";
+import google from "../assets/img/google.png";
 
 const LoginPage = () => {
   const { setItem } = useLocalStorage(LOCAL_STORAGE_KEY.accessToken);
@@ -31,6 +32,22 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 h-[calc(100dvh_-_56px)]">
+      <div className="flex flex-row w-[300px] items-center">
+        <h3 className="text-2xl cursor-pointer">{`<`}</h3>
+        <h3 className="text-2xl font-bold flex-1 text-center">로그인</h3>
+      </div>
+
+      <div className="border border-[#ccc] w-[300px] p-[10px] focus:border-[#807bff] rounded-sm flex flex-row p-4 items-center cursor-pointer">
+        <img src={google} alt="구글 로고" className="w-[30px] h-[30px]"></img>
+        <p className="flex-1 text-center">구글 로그인</p>
+      </div>
+
+      <div className="flex flex-row items-center justify-between w-[300px]">
+        <div className="w-[100px] h-[2px] bg-black"></div>
+        <p className="font-bold">OR</p>
+        <div className="w-[100px] h-[2px] bg-black"></div>
+      </div>
+
       <div className="flex flex-col gap-3">
         <input
           {...getInputProps("email")}
