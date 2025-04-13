@@ -1,8 +1,11 @@
 import { postSignin } from "../apis/auth";
+import { LOCAL_STORAGE_KEY } from "../constants/key";
 import useForm from "../hooks/useForm";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserSigninInformation, validateSignin } from "../utils/validate";
 
 const LoginPage = () => {
+  const { setItem } = useLocalStorage(LOCAL_STORAGE_KEY.accessToken);
   const { values, errors, touched, getInputProps } = useForm<UserSigninInformation>({
     initialValue: {
       email: "",
@@ -15,9 +18,9 @@ const LoginPage = () => {
     try {
       const response = await postSignin(values);
       console.log(response);
-      localStorage.setItem("accessToken", response.data.accessToken);
+      setItem(response.data.accessToken);
     } catch (e) {
-      alert(e?.message);
+      alert(e);
     }
   };
 
