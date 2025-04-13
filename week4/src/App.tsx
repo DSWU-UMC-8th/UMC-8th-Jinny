@@ -7,6 +7,7 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignupPage";
 import HomeLayout from "./layouts/HomeLayout";
+import MyPage from "./pages/MyPage";
 
 // BrowserRouter v5
 // createBrowserRouter v6
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       },
       { path: "login", element: <LoginPage /> },
       { path: "signup", element: <SignUpPage /> },
+      { path: "mypage", element: <MyPage /> },
     ],
   },
 ]);
