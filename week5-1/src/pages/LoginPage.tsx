@@ -1,13 +1,12 @@
-import { postSignin } from "../apis/auth";
-import { LOCAL_STORAGE_KEY } from "../constants/key";
 import useForm from "../hooks/useForm";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserSigninInformation, validateSignin } from "../utils/validate";
 import google from "../assets/img/google.png";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 const LoginPage = () => {
-  const { setItem } = useLocalStorage(LOCAL_STORAGE_KEY.accessToken);
+  const { login, accessToken } = useAuth();
   const navigate = useNavigate();
   const { values, errors, touched, getInputProps } = useForm<UserSigninInformation>({
     initialValue: {
@@ -18,20 +17,19 @@ const LoginPage = () => {
   });
 
   const handleSubmit = async () => {
-    try {
-      const response = await postSignin(values);
-      console.log(response);
-      navigate("/");
-      setItem(response.data.accessToken);
-    } catch (e) {
-      alert(e);
-    }
+    await login(values);
   };
 
   // 오류가 하나라도 있거나, 입력값이 비어있으면 버튼을 비활성화
   const isDisabled =
     Object.values(errors || {}).some((error) => error.length > 0) || // 오류가 있으면 true
     Object.values(values).some((value) => value === ""); // 입력값이 비어있으면 true
+
+  useEffect(() => {
+    if (accessToken) {
+      navigate("/");
+    }
+  }, [navigate, accessToken]);
 
   return (
     <div className="flex flex-col items-center gap-4 mt-[100px]">
