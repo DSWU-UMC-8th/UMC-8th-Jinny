@@ -40,7 +40,7 @@ const LPList = () => {
         </div>
         <img src={data.thumbnail} className="w-[300px]" />
         <p>{data.content}</p>
-        <button>🖤{data.likes.length}</button>
+        <button>🖤{data?.likes?.length || 0}</button>
       </div>
     </div>
   );
