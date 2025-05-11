@@ -25,10 +25,20 @@ const HomePage = () => {
         <button className="p-1 border border-[#ED0086] rounded-sm cursor-pointer">최신순</button>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-4 p-4">
         {data?.map((lp) => (
-          <div className="w-[250px] h-[250px]" key={lp.id}>
-            <img src={lp.thumbnail} alt={lp.title} />
+          <div
+            key={lp.id}
+            className="relative w-[250px] h-[250px] overflow-hidden rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105"
+          >
+            <img src={lp.thumbnail} alt={lp.title} className="w-full h-full object-cover" />
+
+            {/* 오버레이 */}
+            <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-50 transition-opacity duration-300 flex flex-col justify-center items-center text-white p-4">
+              <h3 className="text-lg font-bold mb-2">{lp.title}</h3>
+              <p className="text-sm">{new Date(lp.createdAt).toLocaleDateString("ko-KR")}</p>
+              <p className="text-sm">🖤 {lp.likes.length} </p>
+            </div>
           </div>
         ))}
       </div>
