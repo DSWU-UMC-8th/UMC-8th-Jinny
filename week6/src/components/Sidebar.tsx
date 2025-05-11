@@ -6,8 +6,8 @@ import { useAuth } from "../context/AuthContext";
 const Sidebar = () => {
   const { accessToken } = useAuth();
   return (
-    <div className="mt-20 flex flex-col gap-4 p-6 h-full shadow-md w-[200px]">
-      <div className="flex gap-3 itmes-center">
+    <div className="mt-20 flex flex-col gap-4 p-6 h-full shadow-md w-[200px] lg:block hidden">
+      <div className="flex gap-3 items-center">
         <div className="w-[20px] h-[20px]">
           <img src={Search} alt="찾기" />
         </div>

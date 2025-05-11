@@ -9,3 +9,8 @@ export const getLpList = async (PaginationDto: PaginationDto): Promise<ResponseL
 
   return data;
 };
+
+export const getLpDetail = async (lpid: string) => {
+  const { data } = await axiosInstance.get(`/v1/lps/${lpid}`);
+  return data;
+};
