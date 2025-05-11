@@ -14,3 +14,8 @@ export const getLpDetail = async (lpid: string) => {
   const { data } = await axiosInstance.get(`/v1/lps/${lpid}`);
   return data;
 };
+
+export const getComment = async (lpid: string) => {
+  const { data } = await axiosInstance.get(`/v1/lps/${lpid}/comments`);
+  return data;
+};
