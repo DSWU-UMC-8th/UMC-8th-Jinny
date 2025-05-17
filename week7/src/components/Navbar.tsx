@@ -15,6 +15,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    if (!accessToken) return;
+
     const getData = async () => {
       const response = await getMyInfo();
 
