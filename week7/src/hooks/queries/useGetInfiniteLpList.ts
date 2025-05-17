@@ -7,7 +7,7 @@ function useGetInfiniteLpList(limit: number, search: string, order: PAGINATION_O
   return useInfiniteQuery({
     queryFn: ({ pageParam }) => getLpList({ cursor: pageParam, limit, search, order }),
     queryKey: [QUERY_KEY.lps, search, order],
-    initialPageParam: 0,
+    initialPageParam: 0, // 0부터 시작
     getNextPageParam: (lastPage) => {
       return lastPage.data.hasNext ? lastPage.data.nextCursor : undefined;
     },
