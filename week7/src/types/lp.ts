@@ -105,3 +105,9 @@ export type requestDeleteCommentDto = {
   lpid: number;
   commentId: number;
 };
+
+export type requestEditUserDto = {
+  name: string;
+  bio: string;
+  avatar?: string;
+};

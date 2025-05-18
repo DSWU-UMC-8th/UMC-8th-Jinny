@@ -3,6 +3,7 @@ import {
   RequestCommentDto,
   requestDeleteCommentDto,
   requestEditCommentDto,
+  requestEditUserDto,
   RequestLpDto,
   RequestPostLpDto,
   ResponseCommentDto,
@@ -64,5 +65,15 @@ export const editComment = async ({ lpid, commentId, content }: requestEditComme
 
 export const deleteComment = async ({ lpid, commentId }: requestDeleteCommentDto) => {
   const { data } = await axiosInstance.delete(`/v1/lps/${lpid}/comments/${commentId}`);
+  return data;
+};
+
+export const editUser = async ({ name, bio, avatar }: requestEditUserDto) => {
+  const { data } = await axiosInstance.patch("/v1/users", {
+    name,
+    bio,
+    avatar,
+  });
+
   return data;
 };
