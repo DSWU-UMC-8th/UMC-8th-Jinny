@@ -37,3 +37,22 @@ export type ResponseLikeLpDto = CommomResponse<{
   userId: number;
   lpId: number;
 }>;
+
+export type RequestPostLpDto = {
+  title: string;
+  content: string;
+  thumbnail: string;
+  tags: string[];
+  published: boolean;
+};
+
+export type ResponsePostLpDto = CommomResponse<{
+  id: number;
+  title: string;
+  content: string;
+  thumbnail: string;
+  published: boolean;
+  authorId: number;
+  createdAt: string;
+  updatedAt: string;
+}>;

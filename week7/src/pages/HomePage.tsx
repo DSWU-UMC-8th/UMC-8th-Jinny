@@ -4,10 +4,12 @@ import useGetInfiniteLpList from "../hooks/queries/useGetInfiniteLpList";
 import { PAGINATION_ORDER } from "../enums/common";
 import LpCard from "../components/LpCard/LpCard";
 import LpCardSkeletonList from "../components/LpCard/LpCardSkeletonList";
+import LpCardInput from "../components/LpCard/LpCardInput";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState<PAGINATION_ORDER>(PAGINATION_ORDER.desc);
+  const [showInput, setShowInput] = useState(false);
 
   // const { data, isPending, isError } = useGetLpList({ search, limit: 50 });
   // console.log(data);
@@ -38,10 +40,21 @@ const HomePage = () => {
     return <div className="mt-20">Error</div>;
   }
 
+  const handlePlusClick = () => {
+    setShowInput((prev) => !prev);
+  };
+
   return (
     <div>
       <input value={search} onChange={(e) => setSearch(e.target.value)} />
+      {showInput && <LpCardInput onClose={handlePlusClick} />}
       <div className="w-full flex justify-end">
+        <button
+          className="border border-[#ED0086] rounded-[50%] cursor-pointer p-4 w-4 text-center w-10 h-10 align-center flex justify-center items-center"
+          onClick={handlePlusClick}
+        >
+          +
+        </button>
         <button
           className={`p-1 border border-[#ED0086] rounded-sm cursor-pointer ${
             order === PAGINATION_ORDER.asc ? "bg-gray-100 text-black" : "bg-[#ED0086] text-white"
