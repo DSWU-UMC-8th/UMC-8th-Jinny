@@ -188,8 +188,10 @@ const LpDetailPage = () => {
           <img src={lp?.data.thumbnail} className="w-[300px]" />
           <p>{lp?.data.content}</p>
           <div className="flex gap-4">
-            {lp?.data.tags.map((tag) => (
-              <div className="bg-gray-100 rounded-sm p-1 text-[#ED0086]">#{tag.name}</div>
+            {lp?.data.tags.map((tag, idx) => (
+              <div key={idx} className="bg-gray-100 rounded-sm p-1 text-[#ED0086]">
+                #{tag.name}
+              </div>
             ))}
           </div>
           <button onClick={isLiked ? handleDislikeLp : handleLikeLp} className="cursor-pointer">
