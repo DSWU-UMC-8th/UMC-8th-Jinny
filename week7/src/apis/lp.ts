@@ -1,6 +1,7 @@
 import { PaginationDto } from "../types/common";
 import {
   RequestCommentDto,
+  requestDeleteCommentDto,
   requestEditCommentDto,
   RequestLpDto,
   RequestPostLpDto,
@@ -58,5 +59,10 @@ export const editComment = async ({ lpid, commentId, content }: requestEditComme
     content,
   });
 
+  return data;
+};
+
+export const deleteComment = async ({ lpid, commentId }: requestDeleteCommentDto) => {
+  const { data } = await axiosInstance.delete(`/v1/lps/${lpid}/comments/${commentId}`);
   return data;
 };

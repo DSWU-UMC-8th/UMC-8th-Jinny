@@ -100,3 +100,8 @@ export type requestEditCommentDto = {
   commentId: number;
   content: string;
 };
+
+export type requestDeleteCommentDto = {
+  lpid: number;
+  commentId: number;
+};

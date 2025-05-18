@@ -12,6 +12,7 @@ import usePostComment from "../hooks/mutations/usePostComment";
 import { useState } from "react";
 import { Author } from "../types/lp";
 import useEditComment from "../hooks/mutations/useEditCommtent";
+import useDeleteComment from "../hooks/mutations/useDeleteComment";
 
 const LpDetailPage = () => {
   const { lpid } = useParams();
@@ -39,6 +40,9 @@ const LpDetailPage = () => {
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
   const [editInput, setEditInput] = useState("");
   const { mutate: editComment } = useEditComment();
+
+  // 댓글 삭제
+  const { mutate: deleteCommentMutate } = useDeleteComment();
 
   // const isLiked = lp?.data.likes
   //   .map((like) => {
@@ -100,6 +104,14 @@ const LpDetailPage = () => {
     );
   };
 
+  // 댓글 삭제
+  const handleDeleteComment = (commentId: number) => {
+    deleteCommentMutate({
+      lpid: Number(lpid),
+      commentId: commentId,
+    });
+  };
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -148,7 +160,7 @@ const LpDetailPage = () => {
           {isPending ? (
             <p>댓글 불러오는 중...</p>
           ) : comment?.data?.data.length === 0 ? (
-            <p>아직 댓글이 없습니다.</p>
+            <p className="text-gray-500">아직 댓글이 없습니다.</p>
           ) : (
             comment?.data.data.map((item: { author: Author; content: string; id: number }) => (
               <div key={item.id} className="p-2 border-b flex">
@@ -182,7 +194,10 @@ const LpDetailPage = () => {
                       >
                         수정
                       </button>
-                      <button className="border border-[#ED0086] h-[40px] p-2 rounded-sm text-[#ED0086] cursor-pointer hover:bg-[#ED0086] hover:text-white transition-colors ease-in-out duration-300">
+                      <button
+                        onClick={() => handleDeleteComment(item.id)}
+                        className="border border-[#ED0086] h-[40px] p-2 rounded-sm text-[#ED0086] cursor-pointer hover:bg-[#ED0086] hover:text-white transition-colors ease-in-out duration-300"
+                      >
                         삭제
                       </button>
                     </>
