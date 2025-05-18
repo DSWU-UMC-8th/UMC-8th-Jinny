@@ -33,3 +33,9 @@ export const postLogout = async () => {
   const { data } = await axiosInstance.post("/v1/auth/signout");
   return data;
 };
+
+// 탈퇴
+export const unscribe = async () => {
+  const { data } = await axiosInstance.delete("/v1/users");
+  return data;
+};
