@@ -56,3 +56,41 @@ export type ResponsePostLpDto = CommomResponse<{
   createdAt: string;
   updatedAt: string;
 }>;
+
+export type Author = {
+  id: number;
+  name: string;
+  email: string;
+  bio: string | null;
+  avatar: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Comment = {
+  id: number;
+  content: string;
+  lpId: number;
+  authorId: number;
+  createdAt: string;
+  updatedAt: string;
+  author: Author;
+};
+
+export type CommentResponseData = {
+  data: Comment[];
+  nextCursor: number;
+  hasNext: boolean;
+};
+
+export type ResponseCommentDto = {
+  status: boolean;
+  message: string;
+  statusCode: number;
+  data: CommentResponseData;
+};
+
+export type RequestCommentDto = {
+  lpid: number;
+  content: string;
+};

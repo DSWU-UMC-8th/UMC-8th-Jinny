@@ -7,6 +7,9 @@ import useGetMyInfo from "../hooks/queries/useGetMyInfo";
 import { useAuth } from "../context/AuthContext";
 import usePostLike from "../hooks/mutations/usePostLike";
 import useDeleteLike from "../hooks/mutations/useDeleteLike";
+import useGetComment from "../hooks/mutations/useGetComment";
+import usePostComment from "../hooks/mutations/usePostComment";
+import { useState } from "react";
 
 const LpDetailPage = () => {
   const { lpid } = useParams();
@@ -22,6 +25,12 @@ const LpDetailPage = () => {
   // mutateAsync -> Promise를 반환해서 await 사용 가능
   const { mutate: likeMutate } = usePostLike();
   const { mutate: disLikeMutate } = useDeleteLike();
+
+  const { data: comment } = useGetComment({ lpid: Number(lpid) });
+  console.log(comment);
+
+  const [commentInput, setCommentInput] = useState("");
+  const { mutate: postComment } = usePostComment();
 
   // const isLiked = lp?.data.likes
   //   .map((like) => {
@@ -41,6 +50,18 @@ const LpDetailPage = () => {
 
   const handleDislikeLp = () => {
     disLikeMutate({ lpid: Number(lpid) });
+  };
+
+  const handleCommentPost = () => {
+    if (!commentInput.trim()) return;
+    postComment(
+      { lpid: Number(lpid), content: commentInput },
+      {
+        onSuccess: () => {
+          setCommentInput("");
+        },
+      }
+    );
   };
 
   return (
@@ -72,24 +93,34 @@ const LpDetailPage = () => {
           </div>
         </div>
 
-        <div className="flex justify-between w-[50%] mt-4">
-          <input placeholder="댓글을 입력해주세요" className="w-full" />
-          <button className="w-[100px]">작성</button>
+        <div className="flex justify-between w-[50%] mt-4 gap-2">
+          <input
+            value={commentInput}
+            onChange={(e) => setCommentInput(e.target.value)}
+            placeholder="댓글을 입력해주세요"
+            className="border border-[#ED0086] rounded-sm p-2 w-full"
+          />
+          <button
+            className="w-[100px] border bg-[#ED0086] cursor-pointer rounded-sm text-white"
+            onClick={handleCommentPost}
+          >
+            작성
+          </button>
         </div>
 
         <div className="flex flex-col w-[50%] mt-4 gap-2">
-          {/* {comments.map((item, index) => (
-            <div key={index} className="p-2 border-b">
-              {item.content}
-            </div>
-          ))} */}
+          {isPending ? (
+            <p>댓글 불러오는 중...</p>
+          ) : comment?.data?.data.length === 0 ? (
+            <p>아직 댓글이 없습니다.</p>
+          ) : (
+            comment?.data.data.map((item: { content: string; id: number }) => (
+              <div key={item.id} className="p-2 border-b">
+                {item.content}
+              </div>
+            ))
+          )}
         </div>
-
-        {/* {hasNext && (
-          <div ref={ref} className="h-10 flex items-center justify-center">
-            {loading ? "불러오는 중..." : "더 불러오기"}
-          </div>
-        )} */}
       </div>
     </>
   );

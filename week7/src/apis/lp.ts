@@ -1,7 +1,9 @@
 import { PaginationDto } from "../types/common";
 import {
+  RequestCommentDto,
   RequestLpDto,
   RequestPostLpDto,
+  ResponseCommentDto,
   ResponseLikeLpDto,
   ResponseLpDto,
   ResponseLpListDto,
@@ -22,8 +24,8 @@ export const getLpDetail = async ({ lpid }: RequestLpDto): Promise<ResponseLpDto
   return data;
 };
 
-export const getComment = async (lpid: string) => {
-  const { data } = await axiosInstance.get(`/v1/lps/${lpid}/comments`);
+export const getComment = async ({ lpid }: RequestLpDto): Promise<ResponseCommentDto> => {
+  const { data } = await axiosInstance.get(`/v1/lps/${lpid}/comments`, { params: { lpid } });
   return data;
 };
 
@@ -39,5 +41,13 @@ export const deleteLike = async ({ lpid }: RequestLpDto): Promise<ResponseLikeLp
 
 export const postLp = async (lpData: RequestPostLpDto): Promise<ResponsePostLpDto> => {
   const { data } = await axiosInstance.post("/v1/lps", lpData);
+  return data;
+};
+
+export const postComment = async ({ lpid, content }: RequestCommentDto) => {
+  const { data } = await axiosInstance.post(`/v1/lps/${lpid}/comments`, {
+    content,
+  });
+
   return data;
 };
