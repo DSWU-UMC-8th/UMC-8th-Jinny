@@ -1,6 +1,7 @@
 import { PaginationDto } from "../types/common";
 import {
   RequestCommentDto,
+  requestEditCommentDto,
   RequestLpDto,
   RequestPostLpDto,
   ResponseCommentDto,
@@ -46,6 +47,14 @@ export const postLp = async (lpData: RequestPostLpDto): Promise<ResponsePostLpDt
 
 export const postComment = async ({ lpid, content }: RequestCommentDto) => {
   const { data } = await axiosInstance.post(`/v1/lps/${lpid}/comments`, {
+    content,
+  });
+
+  return data;
+};
+
+export const editComment = async ({ lpid, commentId, content }: requestEditCommentDto) => {
+  const { data } = await axiosInstance.patch(`/v1/lps/${lpid}/comments/${commentId}`, {
     content,
   });
 

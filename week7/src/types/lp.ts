@@ -94,3 +94,9 @@ export type RequestCommentDto = {
   lpid: number;
   content: string;
 };
+
+export type requestEditCommentDto = {
+  lpid: number;
+  commentId: number;
+  content: string;
+};
