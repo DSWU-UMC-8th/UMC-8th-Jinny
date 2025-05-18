@@ -1,30 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect, useState } from "react";
-import { ResponseMyInfoDto } from "../types/auth";
-import { getMyInfo } from "../apis/auth";
+import useGetMyInfo from "../hooks/queries/useGetMyInfo";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { accessToken, logout } = useAuth();
-  const [data, setData] = useState<ResponseMyInfoDto | null>(null);
+
+  const { data } = useGetMyInfo(accessToken);
 
   const handleLogout = async () => {
     await logout();
     navigate("/");
   };
-
-  useEffect(() => {
-    if (!accessToken) return;
-
-    const getData = async () => {
-      const response = await getMyInfo();
-
-      setData(response);
-    };
-
-    getData();
-  }, []);
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md fixed w-full z-10">
