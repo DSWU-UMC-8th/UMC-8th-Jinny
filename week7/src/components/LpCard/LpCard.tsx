@@ -11,16 +11,16 @@ const LpCard = ({ lp }: LpCardProps) => {
   const { accessToken } = useAuth();
   const navigate = useNavigate();
 
-  const handleLpClick = (lpId: number) => {
+  const handleLpClick = (lpid: number) => {
     if (!accessToken) {
       // 로그인하지 않은 경우 경고 창 띄우기
     } else {
-      navigate(`/lp/${lpId}`);
+      navigate(`/lp/${lpid}`);
     }
   };
   return (
     <div
-      className="relative w-[250px] h-[250px] overflow-hidden rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105"
+      className="relative w-[250px] h-[250px] overflow-hidden rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105 cursor-pointer"
       onClick={() => handleLpClick(lp.id)}
     >
       <img src={lp.thumbnail} alt={lp.title} className="w-full h-full object-cover" />
