@@ -134,6 +134,7 @@ const LpDetailPage = () => {
         lpid: Number(lpid),
         body: {
           title: lpName,
+          tags: lp?.data.tags.map((tag) => tag.name) || [],
         },
       },
       {
