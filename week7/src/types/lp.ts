@@ -40,10 +40,10 @@ export type ResponseLikeLpDto = CommomResponse<{
 
 export type RequestPostLpDto = {
   title: string;
-  content: string;
-  thumbnail: string;
-  tags: string[];
-  published: boolean;
+  content?: string;
+  thumbnail?: string;
+  tags?: string[];
+  published?: boolean;
 };
 
 export type ResponsePostLpDto = CommomResponse<{
@@ -110,4 +110,9 @@ export type requestEditUserDto = {
   name: string;
   bio: string;
   avatar?: string;
+};
+
+export type requestEditLpDto = {
+  lpid: number;
+  body: RequestPostLpDto;
 };

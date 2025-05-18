@@ -3,6 +3,7 @@ import {
   RequestCommentDto,
   requestDeleteCommentDto,
   requestEditCommentDto,
+  requestEditLpDto,
   requestEditUserDto,
   RequestLpDto,
   RequestPostLpDto,
@@ -74,6 +75,18 @@ export const editUser = async ({ name, bio, avatar }: requestEditUserDto) => {
     bio,
     avatar,
   });
+
+  return data;
+};
+
+export const editLp = async ({ lpid, body }: requestEditLpDto) => {
+  const { data } = await axiosInstance.patch(`/v1/lps/${lpid}`, body);
+
+  return data;
+};
+
+export const deleteLp = async ({ lpid }: RequestLpDto) => {
+  const { data } = await axiosInstance.delete(`/v1/lps/${lpid}`);
 
   return data;
 };

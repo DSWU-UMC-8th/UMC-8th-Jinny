@@ -13,6 +13,8 @@ import { useState } from "react";
 import { Author } from "../types/lp";
 import useEditComment from "../hooks/mutations/useEditCommtent";
 import useDeleteComment from "../hooks/mutations/useDeleteComment";
+import useEditLp from "../hooks/mutations/useEditLp";
+import useDeleteLp from "../hooks/mutations/useDeleteLp";
 
 const LpDetailPage = () => {
   const { lpid } = useParams();
@@ -30,7 +32,6 @@ const LpDetailPage = () => {
 
   // 댓글 목록 조회
   const { data: comment } = useGetComment({ lpid: Number(lpid) });
-  console.log(comment);
 
   // 댓글 작성
   const [commentInput, setCommentInput] = useState("");
@@ -43,6 +44,14 @@ const LpDetailPage = () => {
 
   // 댓글 삭제
   const { mutate: deleteCommentMutate } = useDeleteComment();
+
+  // lp 수정
+  const [isEditingLp, setIsEditingLp] = useState(false);
+  const [lpName, setLpName] = useState("");
+  const { mutate: editLpMutate } = useEditLp({ lpid: Number(lpid) });
+
+  // lp 삭제
+  const { mutate: deleteLpMutate } = useDeleteLp();
 
   // const isLiked = lp?.data.likes
   //   .map((like) => {
@@ -112,20 +121,76 @@ const LpDetailPage = () => {
     });
   };
 
+  // lp 수정
+  const handleEditLp = () => {
+    setIsEditingLp((prev) => !prev);
+    setLpName(lp?.data.title || "");
+  };
+
+  // lp 수정 완료
+  const handleEditLpSubmit = () => {
+    editLpMutate(
+      {
+        lpid: Number(lpid),
+        body: {
+          title: lpName,
+        },
+      },
+      {
+        onSuccess: () => {
+          setIsEditingLp(false);
+          setLpName("");
+        },
+      }
+    );
+  };
+
+  // lp 삭제
+  const handleDeleteLp = () => {
+    deleteLpMutate(
+      {
+        lpid: Number(lpid),
+      },
+      {
+        onSuccess: () => {
+          alert("삭제되었습니다.");
+          window.location.href = "/";
+        },
+      }
+    );
+  };
+
   return (
     <>
       <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center">
-          <p className="text-lg font-bold mb-2">{lp?.data.title}</p>
-          <div className="flex w-full justify-between">
-            {/* <p>{lp?.data.author?.name}</p> */}
-            <div className="flex">
-              <img src={Pencil} className="w-[20px]" />
-              <img src={Trash} className="w-[20px]" />
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex w-full justify-between items-center">
+            {!isEditingLp && <p className="text-lg font-bold mb-2">{lp?.data.title}</p>}
+            {isEditingLp && (
+              <input
+                value={lpName}
+                onChange={(e) => setLpName(e.target.value)}
+                className="text-lg font-bold border p-1 flex-1 border border-[#ED0086] rounded-sm p-1 w-full"
+              />
+            )}
+
+            <div className="flex gap-4">
+              {!isEditingLp && <img src={Pencil} onClick={handleEditLp} className="w-[20px] h-[20px] cursor-pointer" />}
+              {isEditingLp && (
+                <button className="cursor-pointer" onClick={handleEditLpSubmit}>
+                  ☑️
+                </button>
+              )}
+              <img src={Trash} className="w-[20px] h-[20px] cursor-pointer" onClick={handleDeleteLp} />
             </div>
           </div>
           <img src={lp?.data.thumbnail} className="w-[300px]" />
           <p>{lp?.data.content}</p>
+          <div className="flex gap-4">
+            {lp?.data.tags.map((tag) => (
+              <div className="bg-gray-100 rounded-sm p-1 text-[#ED0086]">#{tag.name}</div>
+            ))}
+          </div>
           <button onClick={isLiked ? handleDislikeLp : handleLikeLp} className="cursor-pointer">
             {isLiked ? "❤️" : "🖤"} {lp?.data.likes.length || 0}
           </button>
