@@ -5,11 +5,14 @@ import { PAGINATION_ORDER } from "../enums/common";
 import LpCard from "../components/LpCard/LpCard";
 import LpCardSkeletonList from "../components/LpCard/LpCardSkeletonList";
 import LpCardInput from "../components/LpCard/LpCardInput";
+import useDebounce from "../hooks/useDebounce";
+import { SEARCH_DEBOUNCE_DELAY } from "../constants/delay";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState<PAGINATION_ORDER>(PAGINATION_ORDER.desc);
   const [showInput, setShowInput] = useState(false);
+  const debouncedValue = useDebounce(search, SEARCH_DEBOUNCE_DELAY);
 
   // const { data, isPending, isError } = useGetLpList({ search, limit: 50 });
   // console.log(data);
@@ -21,7 +24,7 @@ const HomePage = () => {
     isError,
     fetchNextPage,
     isPending,
-  } = useGetInfiniteLpList(3, search, order);
+  } = useGetInfiniteLpList(3, debouncedValue, order);
 
   // ref: 특정한 HTML 요소를 감시할 수 있음
   // inView: 해당 요소가 화면에 보이면 true
