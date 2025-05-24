@@ -12,6 +12,7 @@ import GoogleLoginRedirectPage from "./pages/GoogleLoginRedirectPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import LpDetailPage from "./pages/LpDetailPage";
+import ThrottlePage from "./pages/ThrottlePage";
 
 // BrowserRouter v5
 // createBrowserRouter v6
@@ -28,6 +29,7 @@ const publicRoutes: RouteObject[] = [
       { path: "signup", element: <SignUpPage /> },
       { path: "/v1/auth/google/callback", element: <GoogleLoginRedirectPage /> },
       { path: "/lp/:lpid", element: <LpDetailPage /> },
+      { path: "/throttle", element: <ThrottlePage /> },
     ],
   },
 ];
