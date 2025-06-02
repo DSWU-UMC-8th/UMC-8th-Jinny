@@ -1,22 +1,22 @@
-import { useDispatch, useSelector } from "../hooks/useCustomRedux";
-import { closeModal } from "../slices/modalSlice";
-import { clearCart } from "../slices/cartSlice";
+import { useModalActions, useModalInfo } from "../hooks/useModal";
+import { useCartActions } from "../hooks/useCartStore";
 
 const Modal = () => {
-  const dispatch = useDispatch();
-
-  const { isOpen } = useSelector((state) => state.modal);
+  const { isOpen } = useModalInfo();
+  const { closeModal } = useModalActions();
+  const { clearCart } = useCartActions();
 
   if (!isOpen) return null; // 모달 닫혀있는 경우 -> 렌더링 X
 
   const handleClickYes = () => {
-    dispatch(clearCart());
-    dispatch(closeModal());
+    clearCart();
+    closeModal();
   };
 
   const handleClickNo = () => {
-    dispatch(closeModal());
+    closeModal();
   };
+
   return (
     <>
       <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
